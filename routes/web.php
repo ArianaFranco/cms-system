@@ -20,7 +20,16 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::resource('posts', App\Http\Controllers\PostController::class)->only([
+    'index', 'show'
+]);;
 
-Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.index');
-Route::get('/post', [App\Http\Controllers\PostController::class, 'show'])->name('admin.post');
-
+Route::middleware('auth')->group(function(){
+    //Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.index');
+    //Route::get('/post/{post}', [App\Http\Controllers\PostController::class, 'show'])->name('post');
+    Route::resource('admin', App\Http\Controllers\AdminController::class);
+    
+    Route::resource('posts', App\Http\Controllers\PostController::class)->except([
+        'index', 'show'
+    ]);
+});
