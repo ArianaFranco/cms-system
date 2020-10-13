@@ -47,4 +47,45 @@ class User extends Authenticatable
     public function posts(){
         return $this->hasMany(Post::class);
     }
+    
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function permissions(){
+        return $this->belongsToMany(Permission::class)->withTimestamps();
+    }
+    
+    
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function roles(){
+        return $this->belongsToMany(Role::class)->withTimestamps();
+    }
+    
+    /**
+     * @param $role
+     * @return bool
+     */
+    public function hasRole($role){
+        
+        if ($this->roles()->where('name', $role)->first()) {
+            return true;
+        }
+        
+        return false;
+    }
+    
+    /**
+     * @param $role
+     * @return bool
+     */
+    public function hasPermission($permission){
+        
+        if ($this->permissions()->where('name', $permission)->first()) {
+            return true;
+        }
+        
+        return false;
+    }
 }
