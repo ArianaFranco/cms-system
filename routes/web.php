@@ -36,3 +36,7 @@ Route::middleware('auth')->group(function(){
 Route::resource('posts', App\Http\Controllers\PostController::class)->only([
     'index', 'show'
 ]);
+
+
+//Using Policy as a middleware
+//->middleware('can:view, post');

@@ -46,6 +46,7 @@
                                 </td>
                                 <td>{{$post->created_at->diffForHumans()}}</td>
                                 <td>
+                                    @can('view', $post)
                                     <form method="post" action="{{route('posts.destroy', $post->id)}}"
                                           enctype="multipart/form-data">
                                         @csrf
@@ -54,6 +55,7 @@
                                             <i class="fa fa-trash" aria-hidden="true"></i>
                                         </button>
                                     </form>
+                                    @endcan
                                 </td>
                             </tr>
                         @endforeach

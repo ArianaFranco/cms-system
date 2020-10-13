@@ -13,7 +13,7 @@ class PostController extends Controller {
      */
     public function index() {
         
-        $posts = Post::latest()->get();
+        $posts = auth()->user()->posts()->paginate(5);
         return view('admin.posts.index', compact('posts'));
     
     }
@@ -25,6 +25,7 @@ class PostController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function create() {
+        
         return view('admin.posts.create');
     }
     
@@ -35,6 +36,10 @@ class PostController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
+    
+        //Using the PostPolicy
+        $this->authorize('create', Post::class);
+        
         
         $validatedData = $request->validate([
             'title'      => 'required|unique:posts|min:8|max:255',
@@ -73,6 +78,13 @@ class PostController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit(Post $post) {
+    
+        //Using the PostPolicy
+        //$this->authorize('view', $post);
+        
+        //Using the PostPolicy
+        /*if(auth()->user()->can('view', $post)){
+        }*/
         
         return view('admin.posts.edit', compact('post'));
     
@@ -103,6 +115,9 @@ class PostController extends Controller {
             
         }
     
+        //Using the PostPolicy
+        $this->authorize('update', $post);
+        
         $post->update($validatedData);
         
         //auth()->user()->posts()->create($validatedData);
@@ -119,6 +134,9 @@ class PostController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy(Post $post, Request $request) {
+    
+        //Using the PostPolicy
+        $this->authorize('delete', $post);
         
         $post->delete();
         $request->session()->flash('message', 'Post was deleted!');
