@@ -64,15 +64,21 @@
                 </div>
             </div>
         </div>
+        <div class="d-flex">
+            <div class="mx-auto">
+                {{--{{$posts->total()}}--}}
+                {{$posts->links()}}
+            </div>
+        </div>
 
     @endsection
     @section('scripts')
     <!-- Page level plugins -->
-        <script src="{{asset('vendor/datatables/jquery.dataTables.min.js')}}"></script>
-        <script src="{{asset('vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
+        {{--<script src="{{asset('vendor/datatables/jquery.dataTables.min.js')}}"></script>
+        <script src="{{asset('vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>--}}
 
         <!-- Page level custom scripts -->
-        <script src="{{asset('js/datatables-scripts.js')}}"></script>
+        {{--<script src="{{asset('js/datatables-scripts.js')}}"></script>--}}
     @endsection
 
 
