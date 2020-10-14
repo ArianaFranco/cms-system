@@ -18,8 +18,11 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'surname',
+        'username',
         'email',
         'password',
+        'avatar'
     ];
 
     /**
@@ -41,6 +44,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
     
+    
+    /**
+     * @param $value
+     */
+    /*public function setPasswordAttribute($value){
+        $this->attributes['password'] = bcrypt($value);
+    }*/
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -87,5 +97,17 @@ class User extends Authenticatable
         }
         
         return false;
+    }
+    
+    public function getAvatarAttribute($value) {
+        
+        if(!$value){
+            return null;
+        }
+        elseif(strpos($value, 'https://') !== false || strpos($value, 'http://') !== false) {
+            return $value;
+        }
+        
+        return asset('storage/' . $value);
     }
 }
