@@ -31,6 +31,9 @@ Route::middleware('auth')->group(function(){
     Route::resource('posts', App\Http\Controllers\PostController::class)->except([
         'index', 'show'
     ]);
+    
+    Route::resource('users', App\Http\Controllers\UserController::class);
+    
 });
     
 Route::resource('posts', App\Http\Controllers\PostController::class)->only([
