@@ -9,7 +9,7 @@
             </div>
             <div class="form-group">
                 <label for="post_image">File</label>
-                <input type="file" name="post_image" class="form-control-file" id="post_image" aria-describedby="" placeholder="Enter title">
+                <input type="file" name="post_image" class="form-control-file" id="post_image" aria-describedby="">
             </div>
             {{--<div class="custom-file">
                 <input type="file" class="custom-file-input" id="post_image">
