@@ -73,10 +73,13 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class)->withTimestamps();
     }
     
-    
+    /**
+     * @return string
+     */
     public function getFullNameAttribute(){
         return $this->name . ' ' .$this->surname;
     }
+    
     /**
      * @param $role
      * @return bool

@@ -43,6 +43,10 @@ class UserController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show(User $user) {
+        
+        //Using the PostPolicy
+        $this->authorize('view', $user);
+        
         return view('admin.users.profile', compact('user'));
     }
     

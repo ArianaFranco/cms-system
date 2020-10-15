@@ -21,6 +21,8 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+
+
 Route::middleware('auth')->group(function(){
     //Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.index');
     //Route::get('/post/{post}', [App\Http\Controllers\PostController::class, 'show'])->name('post');
@@ -32,14 +34,28 @@ Route::middleware('auth')->group(function(){
         'index', 'show'
     ]);
     
-    Route::resource('users', App\Http\Controllers\UserController::class);
+    
+    Route::middleware('role:admin')->group(function() {
+        Route::resource('users', App\Http\Controllers\UserController::class)->only([
+            'index'
+        ]);
+    });
+    
+    Route::middleware(['can:view,user'])->group(function() {
+        
+        Route::resource('users', App\Http\Controllers\UserController::class)->except([
+            'index'
+        ]);
+    });
     
 });
-    
+
 Route::resource('posts', App\Http\Controllers\PostController::class)->only([
     'index', 'show'
 ]);
 
 
+
 //Using Policy as a middleware
 //->middleware('can:view, post');
+//->middleware('can:view, user');
