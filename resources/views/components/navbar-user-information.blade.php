@@ -4,7 +4,7 @@
         <span class="mr-2 d-none d-lg-inline text-gray-600 small">
 
             @if(Auth::check())
-                {{auth()->user()->name}}
+                {{auth()->user()->fullname}}
             @endif
 
         </span>

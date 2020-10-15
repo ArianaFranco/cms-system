@@ -73,6 +73,10 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class)->withTimestamps();
     }
     
+    
+    public function getFullNameAttribute(){
+        return $this->name . ' ' .$this->surname;
+    }
     /**
      * @param $role
      * @return bool
@@ -99,10 +103,14 @@ class User extends Authenticatable
         return false;
     }
     
+    /**
+     * @param $value
+     * @return null|string
+     */
     public function getAvatarAttribute($value) {
         
         if(!$value){
-            return null;
+            return asset('images/default_profile_avatar.png');
         }
         elseif(strpos($value, 'https://') !== false || strpos($value, 'http://') !== false) {
             return $value;

@@ -12,7 +12,9 @@ class UserController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        //
+        $users = User::paginate(5);
+        
+        return view('admin.users.index', compact('users'));
     }
     
     /**
@@ -92,7 +94,12 @@ class UserController extends Controller {
      * @param  \App\Models\User $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user) {
-        //
+    public function destroy(User $user, Request $request) {
+        //Using the PostPolicy
+        //$this->authorize('delete', $user);
+    
+        $user->delete();
+        $request->session()->flash('message', 'User has been deleted!');
+        return back();
     }
 }

@@ -1,6 +1,7 @@
 <x-admin-master>
     @section('content')
-        <h1>All posts</h1>
+        <h1>Users</h1>
+
 
         @if(session('message'))
             <div class="alert alert-danger">{{session('message')}}</div>
@@ -18,9 +19,9 @@
                         <thead>
                         <tr>
                             <th>Id</th>
-                            <th>Owner</th>
-                            <th>Title</th>
-                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Username</th>
+                            <th>Avatar</th>
                             <th>Created At</th>
                             <th>Delete</th>
                         </tr>
@@ -28,26 +29,25 @@
                         <tfoot>
                         <tr>
                             <th>Id</th>
-                            <th>Owner</th>
-                            <th>Title</th>
-                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Username</th>
+                            <th>Avatar</th>
                             <th>Created At</th>
                             <th>Delete</th>
                         </tr>
                         </tfoot>
                         <tbody>
-                        @foreach($posts as $post)
+                        @foreach($users as $user)
                             <tr>
-                                <td>{{$post->id}}</td>
-                                <td>{{$post->user->fullname}}</td>
-                                <td><a href="{{route('posts.edit', $post->id)}}">{{$post->title}}</a></td>
+                                <td>{{$user->id}}</td>
+                                <td><a href="{{route('users.edit', $user->id)}}">{{$user->fullname}}</a></td>
+                                <td>{{$user->username}}</td>
                                 <td>
-                                    <img height="40px" src="{{$post->post_image}}" alt="">
+                                    <img class="img-profile rounded-circle" src="{{$user->avatar}}" alt="" style="height: 3rem; width: 3rem;">
                                 </td>
-                                <td>{{$post->created_at->diffForHumans()}}</td>
+                                <td>{{$user->created_at->diffForHumans()}}</td>
                                 <td>
-                                    @can('view', $post)
-                                    <form method="post" action="{{route('posts.destroy', $post->id)}}"
+                                    <form method="post" action="{{route('users.destroy', $user->id)}}"
                                           enctype="multipart/form-data">
                                         @csrf
                                         @method('DELETE')
@@ -55,7 +55,7 @@
                                             <i class="fa fa-trash" aria-hidden="true"></i>
                                         </button>
                                     </form>
-                                    @endcan
+
                                 </td>
                             </tr>
                         @endforeach
@@ -66,20 +66,15 @@
         </div>
         <div class="d-flex">
             <div class="mx-auto">
-                {{--{{$posts->total()}}--}}
-                {{$posts->links()}}
+                {{--{{$users->total()}}--}}
+                {{$users->links()}}
             </div>
         </div>
 
+
+
     @endsection
     @section('scripts')
-    <!-- Page level plugins -->
-        {{--<script src="{{asset('vendor/datatables/jquery.dataTables.min.js')}}"></script>
-        <script src="{{asset('vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>--}}
 
-        <!-- Page level custom scripts -->
-        {{--<script src="{{asset('js/datatables-scripts.js')}}"></script>--}}
     @endsection
-
-
 </x-admin-master>
