@@ -44,7 +44,7 @@ class UserController extends Controller {
      */
     public function show(User $user) {
         
-        //Using the PostPolicy
+        //Using the UserPolicy
         $this->authorize('view', $user);
         
         return view('admin.users.profile', compact('user'));
@@ -57,7 +57,10 @@ class UserController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit(User $user) {
-        //
+        //Using the UserPolicy
+        $this->authorize('view', $user);
+    
+        return view('admin.users.profile', compact('user'));
     }
     
     /**
@@ -99,11 +102,11 @@ class UserController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy(User $user, Request $request) {
-        //Using the PostPolicy
+        //Using the UserPolicy
         //$this->authorize('delete', $user);
     
         $user->delete();
-        $request->session()->flash('message', 'User has been deleted!');
+        $request->session()->flash('success', 'User has been deleted!');
         return back();
     }
 }

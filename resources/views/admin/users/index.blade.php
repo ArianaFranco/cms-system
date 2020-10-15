@@ -2,12 +2,12 @@
     @section('content')
         <h1>Users</h1>
 
-
-        @if(session('message'))
-            <div class="alert alert-danger">{{session('message')}}</div>
+        @if(session('error'))
+            <x-alert type="danger" :message="session('error')" />
         @elseif(session('success'))
-            <div class="alert alert-success">{{session('success')}}</div>
+            <x-alert type="success" :message="session('success')" />
         @endif
+
     <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
