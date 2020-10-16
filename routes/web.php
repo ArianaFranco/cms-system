@@ -39,6 +39,7 @@ Route::middleware('auth')->group(function(){
         Route::resource('users', App\Http\Controllers\UserController::class)->only([
             'index'
         ]);
+    
     });
     
     Route::middleware(['can:view,user'])->group(function() {
@@ -46,6 +47,13 @@ Route::middleware('auth')->group(function(){
         Route::resource('users', App\Http\Controllers\UserController::class)->except([
             'index'
         ]);
+    
+        Route::put('users/{user}/attach', [\App\Http\Controllers\UserController::class, 'attachRole'])
+             ->name('users.role.attach');
+            
+        Route::put('users/{user}/detach', [\App\Http\Controllers\UserController::class, 'detachRole'])
+             ->name('users.role.detach');
+        
     });
     
 });

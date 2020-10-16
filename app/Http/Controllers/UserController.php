@@ -2,10 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller {
+    
+    public function __construct()
+    {
+        $this->middleware('auth');
+        
+    }
     /**
      * Display a listing of the resource.
      *
@@ -59,8 +66,9 @@ class UserController extends Controller {
     public function edit(User $user) {
         //Using the UserPolicy
         $this->authorize('view', $user);
+        $roles = Role::all();
     
-        return view('admin.users.profile', compact('user'));
+        return view('admin.users.profile', compact('user', 'roles'));
     }
     
     /**
@@ -107,6 +115,26 @@ class UserController extends Controller {
     
         $user->delete();
         $request->session()->flash('success', 'User has been deleted!');
+        return back();
+    }
+    
+    /**
+     * @param User $user
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function attachRole(User $user){
+        $user->roles()->attach(request('role'));
+        
+        return back();
+    }
+    
+    /**
+     * @param User $user
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function detachRole(User $user){
+        $user->roles()->detach(request('role'));
+        
         return back();
     }
 }
