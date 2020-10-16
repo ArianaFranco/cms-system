@@ -39,8 +39,9 @@ Route::middleware('auth')->group(function(){
         Route::resource('users', App\Http\Controllers\UserController::class)->only([
             'index'
         ]);
-    
+        
     });
+    
     
     Route::middleware(['can:view,user'])->group(function() {
         

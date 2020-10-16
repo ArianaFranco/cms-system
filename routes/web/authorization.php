@@ -20,6 +20,14 @@ Route::middleware('auth')->group(function () {
         Route::resource('permissions', App\Http\Controllers\PermissionController::class);
         
     });
+    
+    
+    Route::put('roles/{role}/attach', [\App\Http\Controllers\RoleController::class, 'attachPermission'])
+         ->name('roles.permission.attach');
+    
+    Route::put('roles/{role}/detach', [\App\Http\Controllers\RoleController::class, 'detachPermission'])
+         ->name('roles.permission.detach');
+    
 });
 
 

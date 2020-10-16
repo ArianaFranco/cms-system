@@ -28,4 +28,18 @@ class Role extends Model
     public function users(){
         return $this->belongsToMany(User::class)->withTimestamps();
     }
+    
+    /**
+     * @param $role
+     * @return bool
+     */
+    public function hasPermission($permission){
+        
+        if ($this->permissions()->where('slug', $permission)->first()) {
+            return true;
+        }
+        
+        return false;
+    }
+    
 }

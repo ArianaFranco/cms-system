@@ -64,6 +64,7 @@
             <x-sidebar.users-links/>
         @endif
 
+        <x-sidebar.authorization-links/>
 
         <!-- Nav Item - Utilities Collapse Menu -->
         <li class="nav-item">
