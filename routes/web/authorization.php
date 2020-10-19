@@ -13,14 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth')->group(function () {
-    Route::middleware('role:admin')->group(function () {
-        
-        Route::resource('roles', App\Http\Controllers\RoleController::class);
-        Route::resource('permissions', App\Http\Controllers\PermissionController::class);
-        
-    });
+
+Route::middleware('role:admin')->group(function () {
     
+    Route::resource('roles', App\Http\Controllers\RoleController::class);
+    Route::resource('permissions', App\Http\Controllers\PermissionController::class);
     
     Route::put('roles/{role}/attach', [\App\Http\Controllers\RoleController::class, 'attachPermission'])
          ->name('roles.permission.attach');
@@ -29,6 +26,10 @@ Route::middleware('auth')->group(function () {
          ->name('roles.permission.detach');
     
 });
+
+
+
+
 
 
 
