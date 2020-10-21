@@ -113,6 +113,9 @@ class User extends Authenticatable
     public function getAvatarAttribute($value) {
         
         if(!$value){
+            
+            return 'https://www.gravatar.com/avatar/' . md5(strtolower(trim($this->email))) . '?s=200&d=mm';
+            
             return asset('images/default_profile_avatar.png');
         }
         elseif(strpos($value, 'https://') !== false || strpos($value, 'http://') !== false) {
