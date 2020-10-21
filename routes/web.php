@@ -57,6 +57,10 @@ Route::middleware('auth')->group(function(){
         
     });
     
+    
+    Route::post('image-destroy', [\App\Http\Controllers\ImageController::class, 'destroy'])->name('images.destroy');
+    Route::resource('images-upload', App\Http\Controllers\ImageController::class);
+    Route::get('getImages', [\App\Http\Controllers\ImageController::class, 'getImages'])->name('getImages');
 });
 
 Route::resource('posts', App\Http\Controllers\PostController::class)->only([
