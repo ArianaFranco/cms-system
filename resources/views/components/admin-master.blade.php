@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
 
@@ -9,9 +9,13 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <title>SB Admin 2 - Blank</title>
 
-    <!-- Custom fonts for this template-->
+
+<!-- Custom fonts for this template-->
     <link rel="stylesheet" href="{{asset('/css/font-awesome.min.css')}}">
     <link href="{{asset('vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
@@ -20,10 +24,15 @@
     <!-- Custom styles for this template-->
     <link href="{{asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
 
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    @yield('styles')
+
 </head>
 
 <body id="page-top">
-
+<div id="app"></div>
 <!-- Page Wrapper -->
 <div id="wrapper">
 
@@ -64,9 +73,9 @@
             <x-sidebar.users-links/>
 
             <x-sidebar.authorization-links/>
-        @endif
+    @endif
 
-        <!-- Nav Item - Utilities Collapse Menu -->
+    <!-- Nav Item - Utilities Collapse Menu -->
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                aria-expanded="true" aria-controls="collapseUtilities">
@@ -361,15 +370,19 @@
 </a>
 
 
+<!-- Scripts -->
+<script src="{{ asset('js/app.js') }}" defer></script>
+
 <!-- Bootstrap core JavaScript-->
 <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
-<script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+{{--<script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>--}}
 
 <!-- Core plugin JavaScript-->
 <script src="{{asset('vendor/jquery-easing/jquery.easing.min.js')}}"></script>
 
 <!-- Custom scripts for all pages-->
 <script src="{{asset('js/sb-admin-2.min.js')}}"></script>
+
 
 @yield('scripts')
 
