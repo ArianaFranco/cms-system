@@ -22,6 +22,9 @@ Auth::routes();
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
+Route::post('ckeditor/store', [App\Http\Controllers\TestController::class, 'storeCkeditor'])->name('ckeditor.store');
+Route::get('ckeditor', [App\Http\Controllers\TestController::class, 'ckeditor'])->name('ckeditor');
+
 
 Route::middleware('auth')->group(function(){
     //Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.index');
