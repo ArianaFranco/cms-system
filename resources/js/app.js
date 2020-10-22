@@ -10,6 +10,10 @@ window.Dropzone = require('dropzone');
 
 window.Vue = require('vue');
 
+window.ClassicEditor = require('@ckeditor/ckeditor5-build-classic');
+//window.SimpleUploadAdapter = require('@ckeditor/ckeditor5-upload/src/adapters/simpleuploadadapter');
+
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
