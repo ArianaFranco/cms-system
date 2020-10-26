@@ -49,4 +49,12 @@ class Post extends Model {
         
         return asset('storage/' . $value);
     }
+    
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function comments() {
+        return $this->hasMany(Comment::class);
+    }
+    
 }

@@ -21,11 +21,10 @@
     <link href="{{ asset('css/blog-home.css') }}" rel="stylesheet">
 
 
-
 </head>
 
 <body>
-
+<div id="app"></div>
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
@@ -151,6 +150,9 @@
     </div>
     <!-- /.container -->
 </footer>
+
+<!-- Scripts -->
+<script src="{{ asset('js/app.js') }}" defer></script>
 
 <!-- Bootstrap core JavaScript -->
 <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>

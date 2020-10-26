@@ -33,7 +33,9 @@ Route::middleware('auth')->group(function(){
     Route::get('/posts/create', [App\Http\Controllers\PostController::class, 'create'])->name('posts.create');
     Route::resource('admin', App\Http\Controllers\AdminController::class);
     
-    Route::resource('posts', App\Http\Controllers\PostController::class)->except([
+    Route::resource('comments',App\Http\Controllers\CommentController::class);
+    
+    Route::resource('posts',App\Http\Controllers\PostController::class)->except([
         'index', 'show'
     ]);
     
